@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandwich-facts-deployment
+  labels:
+    app: sandwich-facts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sandwich-facts
+  template:
+    metadata:
+      labels:
+        app: sandwich-facts
+    spec:
+      containers:
+      - name: sandwich-facts
+        image: sandwich-facts:latest
