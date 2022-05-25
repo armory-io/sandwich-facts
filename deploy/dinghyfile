@@ -7,7 +7,7 @@
   },
   "pipelines": [
     {
-      "name": "GitOps + Multi-Region"
+      "name": "GitOps + Multi-Region",
       "application": "{{ var "app" }}",
       "triggers": [
         {
