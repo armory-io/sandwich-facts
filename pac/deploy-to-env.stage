@@ -1,0 +1,69 @@
+{{ $gitRepoArtifactId := (uuidv4 | lower) }}
+
+{
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "customKind": true,
+        "id": "9cfeb9bf-d710-4300-87e7-0b66dbd69e31"
+      },
+      "displayName": "{{ var "env" }}",
+      "id": "{{ $gitRepoArtifactId }}",
+      "matchArtifact": {
+        "artifactAccount": "embedded-artifact",
+        "customKind": false,
+        "id": "5514e725-532e-4c91-ac54-4588cb62cb41",
+        "type": "embedded/base64"
+      },
+      "useDefaultArtifact": false,
+      "usePriorArtifact": false
+    }
+  ],
+  "inputArtifact": {
+    "account": "gitrepo",
+    "artifact": {
+      "artifactAccount": "gitrepo",
+      "customKind": true,
+      "id": "fc7a4a5c-5825-4861-9200-5186207f22ef",
+      "reference": "https://github.com/armory-io/sandwich-facts.git",
+      "type": "git/repo",
+      "version": "main"
+    }
+  },
+  "inputArtifacts": null,
+  "kustomizeFilePath": "deploy/overlays/{{ var "env"}}/kustomization.yaml",
+  "name": "Kustomize ({{ var "env" }})",
+  "overrides": {},
+  "refId": "{{ var "kustomizeRefId" }}",
+  "requisiteStageRefIds": [
+    {{ with $upstream := (var "upstreamStage") }}
+      "{{ . }}"
+    {{ end }}
+  ],
+  "templateRenderer": "KUSTOMIZE",
+  "type": "bakeManifest"
+},
+{
+  "account": "{{ var "account" }}",
+  "cloudProvider": "kubernetes",
+  "manifestArtifactId": "{{ $gitRepoArtifactId }}",
+  "moniker": {
+    "app": "sandwich-facts"
+  },
+  "name": "Deploy ({{ var "env" }})",
+  "namespaceOverride": "",
+  "refId": "{{ var "deployRefId" }}",
+  "requisiteStageRefIds": [
+    "{{ var "kustomizeRefId" }}"
+  ],
+  "skipExpressionEvaluation": true,
+  "source": "artifact",
+  "trafficManagement": {
+    "enabled": false,
+    "options": {
+      "enableTraffic": false,
+      "services": []
+    }
+  },
+  "type": "deployManifest"
+}

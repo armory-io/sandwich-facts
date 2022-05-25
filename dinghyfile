@@ -1,0 +1,143 @@
+{
+  "application": "{{ var "app" }}",
+  "globals": {
+    "app": "sandwich-facts",
+    "east": "k8s-us-east-demo-cluster",
+    "west": "k8s-us-west-demo-cluster"
+  },
+  "pipelines": [
+    {
+      "application": "{{ var "app" }}",
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "artifactAccount": "github",
+            "id": "85a51c2c-5c6e-48b9-b718-50f01c8b0b7d",
+            "name": "deployment.yaml",
+            "reference": "https://api.github.com/repos/armory-io/sandwich-facts/contents/deployment.yaml",
+            "type": "github/file",
+            "version": "main"
+          },
+          "displayName": "deployment-yaml-artifact",
+          "id": "98cd5e16-bd9a-48c0-bff0-b48a2c05c86c",
+          "matchArtifact": {
+            "artifactAccount": "github",
+            "customKind": true,
+            "id": "3597d479-ce0b-40f8-8699-e7f9e71d9e04",
+            "name": "deployment.yaml",
+            "type": "github/file"
+          },
+          "useDefaultArtifact": true,
+          "usePriorArtifact": false
+        },
+        {
+          "defaultArtifact": {
+            "artifactAccount": "github",
+            "id": "8c1ce873-95f7-4dde-bf6f-c1c5130e484c",
+            "name": "test-job.yaml",
+            "reference": "https://api.github.com/repos/armory-io/sandwich-facts/contents/test-job.yaml",
+            "type": "github/file",
+            "version": "main"
+          },
+          "displayName": "test-job-artifact",
+          "id": "35be39de-80e2-45a8-8920-779390108d49",
+          "matchArtifact": {
+            "artifactAccount": "github",
+            "customKind": true,
+            "id": "bdac89aa-11da-4483-a5e1-54b4ba85b7db",
+            "name": "test-job.yaml",
+            "type": "github/file"
+          },
+          "useDefaultArtifact": true,
+          "usePriorArtifact": false
+        },
+        {
+          "defaultArtifact": {
+            "artifactAccount": "github",
+            "id": "4580cfd3-f3a1-4e7d-96dd-3517a8de2956",
+            "name": "test-namespace.yaml",
+            "reference": "https://api.github.com/repos/armory-io/sandwich-facts/contents/test-namespace.yaml",
+            "type": "github/file",
+            "version": "main"
+          },
+          "displayName": "test-namespace-artifact",
+          "id": "03d8eba0-7152-474a-b5b2-98e6da8bce26",
+          "matchArtifact": {
+            "artifactAccount": "github",
+            "customKind": true,
+            "id": "e60d41ec-a475-4108-9a6a-351cccdd0ae2",
+            "name": "test-namespace.yaml",
+            "type": "github/file"
+          },
+          "useDefaultArtifact": true,
+          "usePriorArtifact": false
+        },
+        {
+          "defaultArtifact": {
+            "artifactAccount": "github",
+            "id": "00394fe4-810d-4fa9-af43-40d7a8c97e60",
+            "name": "prod-namespace.yaml",
+            "reference": "https://api.github.com/repos/armory-io/sandwich-facts/contents/prod-namespace.yaml",
+            "type": "github/file",
+            "version": "main"
+          },
+          "displayName": "prod-namespace-artifact",
+          "id": "c5177a09-ec78-4b06-80f0-4bfd65a86af8",
+          "matchArtifact": {
+            "artifactAccount": "github",
+            "customKind": true,
+            "id": "b330e5b4-c26e-48da-8f34-fe1c3dcad9af",
+            "name": "prod-namespace.yaml",
+            "type": "github/file"
+          },
+          "useDefaultArtifact": true,
+          "usePriorArtifact": false
+        }
+      ],
+      "keepWaitingPipelines": false,
+      "limitConcurrent": true,
+      "roles": [
+        "engineering-core"
+      ],
+      "schema": "1",
+      "spelEvaluator": "v4",
+      "stages": [
+        {{ local_module "pac/deploy-to-env.stage"
+            "env" "test-east"
+            "kustomizeRefId" "1"
+            "deployRefId" "2"
+            "account" (var "east")
+        }},
+        {
+          "account": "{{ var "east" }}",
+          "alias": "runJob",
+          "application": "sandwich-facts",
+          "cloudProvider": "kubernetes",
+          "credentials": "{{ var "east" }}",
+          "manifestArtifactId": "35be39de-80e2-45a8-8920-779390108d49",
+          "name": "Run Functional Tests",
+          "source": "artifact",
+          "type": "runJobManifest",
+          "refId": "3",
+          "requisiteStageRefIds": [
+            "2"
+          ]
+        },
+        {{ local_module "pac/deploy-to-env.stage"
+            "env" "prod-east"
+            "upstreamStage" "3"
+            "kustomizeRefId" "4"
+            "deployRefId" "5"
+            "account" (var "east")
+        }},
+        {{ local_module "pac/deploy-to-env.stage"
+            "env" "prod-west"
+            "upstreamStage" "3"
+            "kustomizeRefId" "6"
+            "deployRefId" "7"
+            "account" (var "west")
+        }}
+      ]
+    }
+  ]
+}
