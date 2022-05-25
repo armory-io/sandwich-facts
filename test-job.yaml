@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pi
+  name: sandwich-facts-test
   namespace: sandwich-facts
 spec:
   template:
