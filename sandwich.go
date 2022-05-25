@@ -14,7 +14,7 @@ func main() {
 	facts := []string{
 		"Sandwiches!",
 		"Sandwich is not spelled 'sandwhich'",
-		"It is debated that hotdogs are sanwiches",
+		"It is debated that hotdogs are sandwiches",
 		"The sandwich is named after John Montagu (1718-92), the 4th Earl of Sandwich, who started a craze for eating beef between two slices of toast",
 		"The first recorded use of the word 'Sandwich' (with a capital S), was in 1762 by Edward Gibbon writing of the Beef Steak Club in London",
 		"The only novel by Jane Austen containing the word ‘sandwich’ is Mansfield Park",
