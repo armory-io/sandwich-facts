@@ -9,6 +9,7 @@
     {
       "name": "GitOps + Multi-Region",
       "application": "{{ var "app" }}",
+      "description": "This is a demo pipeline!",  
       "triggers": [
         {
           "branch": "main",
