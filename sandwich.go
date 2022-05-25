@@ -2,13 +2,17 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"log"
 	"math/rand"
-	"time"
+	"net/http"
 )
 
 func main() {
+	fmt.Println("Sandwich Facts Started!")
 
 	facts := []string{
+		"Sandwiches!",
 		"Sandwich is not spelled 'sandwhich'",
 		"It is debated that hotdogs are sanwiches",
 		"The sandwich is named after John Montagu (1718-92), the 4th Earl of Sandwich, who started a craze for eating beef between two slices of toast",
@@ -23,9 +27,12 @@ func main() {
 		"Sandwich' is also a town in Kent, although the name has no direct connection with a sandwich",
 	}
 
-	for {
-		fmt.Println(facts[rand.Intn(len(facts))])
-		time.Sleep(30 * time.Second)
+	helloHandler := func(w http.ResponseWriter, req *http.Request) {
+		fact := facts[rand.Intn(len(facts))]
+		fmt.Println(fact)
+		io.WriteString(w, fact)
 	}
 
+	http.HandleFunc("/", helloHandler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
