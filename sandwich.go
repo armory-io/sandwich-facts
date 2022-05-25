@@ -12,6 +12,7 @@ func main() {
 	fmt.Println("Sandwich Facts Started!")
 
 	facts := []string{
+		"I'm a new fact!",
 		"Sandwiches!",
 		"Sandwich is not spelled 'sandwhich'",
 		"It is debated that hotdogs are sandwiches",
