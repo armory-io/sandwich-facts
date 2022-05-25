@@ -1,0 +1,8 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandwich-facts-deployment
+  labels:
+    env: k8s-dynamo-staging-test
+spec:
+  replicas: 1

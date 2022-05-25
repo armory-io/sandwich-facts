@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sandwich-facts-service
+spec:
+  selector:
+    app: sandwich-facts
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandwich-facts-deployment
+  labels:
+    app: sandwich-facts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sandwich-facts
+  template:
+    metadata:
+      labels:
+        app: sandwich-facts
+    spec:
+      containers:
+      - name: sandwich-facts
+        image: ghcr.io/armory-io/sandwich-facts
+        ports:
+        - containerPort: 8080
