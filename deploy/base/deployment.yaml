@@ -14,9 +14,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sandwich-facts-deployment
-  owner: andrew@armory.io
   labels:
     app: sandwich-facts
+    owner: andrew@armory.io
 spec:
   replicas: 3
   selector:

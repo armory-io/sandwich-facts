@@ -16,7 +16,6 @@
           "expectedArtifactIds": [
             "98cd5e16-bd9a-48c0-bff0-b48a2c05c86c",
             "35be39de-80e2-45a8-8920-779390108d49",
-            "03d8eba0-7152-474a-b5b2-98e6da8bce26",
             "c5177a09-ec78-4b06-80f0-4bfd65a86af8"
           ],
           "project": "armory-io",
