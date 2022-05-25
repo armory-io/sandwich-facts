@@ -17,7 +17,7 @@ jobs:
         with:
           registry: armory-docker-local.jfrog.io
           username: ${{ secrets.ARTIFACTORY_USER }}
-          password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          password: ${{ secrets.ARTIFACTORY_TOKEN }}
       
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
