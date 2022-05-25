@@ -36,20 +36,20 @@
       "expectedArtifacts": [
         {
           "defaultArtifact": {
-            "artifactAccount": "github",
+            "artifactAccount": "gitrepo",
             "id": "85a51c2c-5c6e-48b9-b718-50f01c8b0b7d",
-            "name": "deployment.yaml",
-            "reference": "https://api.github.com/repos/armory-io/sandwich-facts/contents/deployment.yaml",
-            "type": "github/file",
+            "location": "deploy/.*",
+            "reference": "https://github.com/armory-io/sandwich-facts.git",
+            "type": "git/repo",
             "version": "main"
           },
-          "displayName": "deployment-yaml-artifact",
+          "displayName": "deploy-manifests",
           "id": "98cd5e16-bd9a-48c0-bff0-b48a2c05c86c",
           "matchArtifact": {
             "artifactAccount": "github",
             "customKind": true,
             "id": "3597d479-ce0b-40f8-8699-e7f9e71d9e04",
-            "name": "deployment.yaml",
+            "name": "deploy/.*",
             "type": "github/file"
           },
           "useDefaultArtifact": true,
