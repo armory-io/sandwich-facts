@@ -25,11 +25,11 @@
           "type": "git"
         },
         {
-          "account": "ghcr-armory-io",
+          "account": "artifactory",
           "enabled": true,
           "expectedArtifactIds": [],
           "organization": "armory-io",
-          "registry": "ghcr.io",
+          "registry": "armory-docker-all.jfrog.io",
           "repository": "armory-io/sandwich-facts",
           "type": "docker"
         }
