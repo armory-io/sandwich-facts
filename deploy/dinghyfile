@@ -128,7 +128,7 @@
       "schema": "1",
       "spelEvaluator": "v4",
       "stages": [
-        {{ local_module "pac/deploy-to-env.stage"
+        {{ local_module "deploy/pac/deploy-to-env.stage"
             "env" "test-east"
             "kustomizeRefId" "1"
             "deployRefId" "2"
@@ -149,14 +149,14 @@
             "2"
           ]
         },
-        {{ local_module "pac/deploy-to-env.stage"
+        {{ local_module "deploy/pac/deploy-to-env.stage"
             "env" "prod-east"
             "upstreamStage" "3"
             "kustomizeRefId" "4"
             "deployRefId" "5"
             "account" (var "east")
         }},
-        {{ local_module "pac/deploy-to-env.stage"
+        {{ local_module "deploy/pac/deploy-to-env.stage"
             "env" "prod-west"
             "upstreamStage" "3"
             "kustomizeRefId" "6"
