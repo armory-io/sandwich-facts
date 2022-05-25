@@ -16,7 +16,7 @@ metadata:
   name: sandwich-facts-deployment
   labels:
     app: sandwich-facts
-    owner: andrew
+    owner: joe
 spec:
   replicas: 3
   selector:
