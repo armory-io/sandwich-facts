@@ -1,0 +1,70 @@
+version: v1
+kind: kubernetes
+application: sandwich-facts
+# Map of Deployment Targets, this is set up in a way where 
+# we can do multi-target deployments (multi-region or multi-cluster)
+targets:
+  # This in the name of a deployment, underneath it are its configuration
+  staging:
+    # the name of an agent configured account
+    account: andrew-demo
+    # Optionally override the namespaces that are in the manifests
+    namespace: andrew-demo-staging
+    # This is the key to a strategy under the strategies map
+    strategy: rolling
+    # This is a list of manifest names that should be included in this deployment
+    constraints:
+      afterDeployment:
+        - pause:
+            untilApproved: true
+  prod-us-west:
+    # the name of an agent configured account
+    account: andrew-demo
+    # Optionally override the namespaces that are in the manifests
+    namespace: andrew-demo-us-west
+    # This is the key to a strategy under the strategies map
+    strategy: mycanary
+    constraints:
+      dependsOn: ["staging"]
+  prod-us-east:
+    # the name of an agent configured account
+    account: andrew-demo
+    # Optionally override the namespaces that are in the manifests
+    namespace: andrew-demo-us-east
+    # This is the key to a strategy under the strategies map
+    strategy: mycanary
+    constraints:
+      dependsOn: ["staging"]
+  prod-eu-central:
+    # the name of an agent configured account
+    account: andrew-demo
+    # Optionally override the namespaces that are in the manifests
+    namespace: andrew-demo-eu-central
+    # This is the key to a strategy under the strategies map
+    strategy: mycanary
+    constraints:
+      dependsOn: ["staging"]
+# The list of manifests sources
+manifests:
+  # This will read all yaml|yml files in a dir and deploy all manifests in that directory to all targets.
+  - path: ./cdaas/manifest.yml
+# The map of strategies, a deployment target will reference one of these
+strategies:
+  # this is the name for the strategy
+  mycanary:
+    # This map key, is the deployment strategy type
+    canary: 
+        # List of canary steps
+        steps:
+          # The map key is the step type
+          - setWeight:
+              weight: 25
+          - setWeight:
+              weight: 50
+          - setWeight:
+              weight: 100
+  rolling:
+    canary:
+      steps: 
+      - setWeight:
+          weight: 100
