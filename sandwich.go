@@ -27,6 +27,7 @@ func main() {
 		"The record for creating the most expensive sandwich ever made is claimed by chef Tom Bridge whose Lancaster Cheese Sandwich which was sold on eBay in 2006 for £345",
 		"The Sandwich Islands (now Hawaii) were also named after the 4th Earl of Sandwich in 1778",
 		"Sandwich' is also a town in Kent, although the name has no direct connection with a sandwich",
+		"New line",
 	}
 
 	helloHandler := func(w http.ResponseWriter, req *http.Request) {
