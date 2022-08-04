@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: sandwich-facts
-        image: "nginx:1.22"
+        image: armory-docker-public.jfrog.io/armory-io/sandwich-facts
         ports:
         - containerPort: 8080
