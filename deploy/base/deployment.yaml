@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: sandwich-facts
-        image: nginx: 1.21
+        image: "nginx:1.21"
         ports:
         - containerPort: 8080
