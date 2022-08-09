@@ -1,6 +1,7 @@
 {{ $gitRepoArtifactId := (uuidv4 | lower) }}
 
 {
+  "x-module-id": "myid",
   "expectedArtifacts": [
     {
       "defaultArtifact": {
