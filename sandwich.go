@@ -14,6 +14,7 @@ func main() {
 	facts := []string{
 		"Sandwiches are good.",
 		"I'm a new fact!",
+		"I'm also a new fact!",
 		"Sandwiches!",
 		"Sandwich is not spelled 'sandwhich'",
 		"It is debated that hotdogs are sandwiches",
