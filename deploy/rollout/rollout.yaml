@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1 # Changed from apps/v1
+kind: Rollout # Changed from Deployment
+# --- Everything below this comment is the same as a deployment ---
+metadata:
+  name: sandwich-facts-rollout
+  labels:
+    app: sandwich-facts
+    owner: andrew
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sandwich-facts
+  template:
+    metadata:
+      labels:
+        app: sandwich-facts
+    spec:
+      containers:
+      - name: sandwich-facts
+        image: armory-docker-all.jfrog.io/armory-io/sandwich-facts
+        ports:
+        - containerPort: 8080
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+# --- Everything above this comment are the same as a deployment ---
+    blueGreen: # A new field for the Blue Green strategy options
+      previewService: sandwich-facts-service # Reference to a service
+      activeService: sandwich-facts-service # Reference to a service

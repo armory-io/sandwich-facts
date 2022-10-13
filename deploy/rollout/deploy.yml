@@ -1,0 +1,18 @@
+version: v1
+kind: kubernetes
+application: sandwich-facts
+targets:
+  staging:
+    account: local-minikube
+    namespace: staging  
+    constraints:
+      afterDeployment:
+        - pause:
+            untilApproved: true
+  prod:
+    account: local-minikube
+    namespace: prod
+    constraints:
+      dependsOn: ["staging"]
+manifests:
+  - path: ./deploy/rollout/rollout.yaml
