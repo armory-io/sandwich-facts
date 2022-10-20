@@ -9,7 +9,7 @@ terraform {
 provider "aws" {
   region = var.aws_region
   assume_role {
-    role_name    = "arn:aws:iam::${var.account_id}:role/sandwich-facts-infrastructure-demo"
+    role_arn     = "arn:aws:iam::${var.account_id}:role/sandwich-facts-infrastructure-demo"
     session_name = "EphemeralDemoResources"
   }
 }
