@@ -9440,6 +9440,8 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9448,6 +9450,8 @@ metadata:
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cmd-params-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9456,11 +9460,15 @@ metadata:
     app.kubernetes.io/name: argocd-gpg-keys-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-gpg-keys-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9469,6 +9477,8 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-rbac-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 data:
@@ -9488,6 +9498,8 @@ metadata:
     app.kubernetes.io/name: argocd-ssh-known-hosts-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-ssh-known-hosts-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9496,6 +9508,8 @@ metadata:
     app.kubernetes.io/name: argocd-tls-certs-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-tls-certs-cm
+  annotations:
+    strategy.spinnaker.io/versioned: false
 ---
 apiVersion: v1
 kind: Secret
