@@ -5,3 +5,6 @@ resources:
   - ./ns.yml
   - ./rollout.yml
   - ./service.yml
+
+configurations:
+  - ./binding.yml

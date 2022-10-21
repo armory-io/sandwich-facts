@@ -1,0 +1,8 @@
+# Establish relationships between the ServiceAccount resources needed if names
+# are changed (e.g. via the utilities/unique-service-account.yml patch).
+apiVersion: builtin
+nameReference:
+  - kind: Service
+    fieldSpecs:
+      - kind: Rollout
+        path: spec/strategy/blueGreen/activeService
