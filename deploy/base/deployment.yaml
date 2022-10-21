@@ -18,7 +18,7 @@ metadata:
     app: sandwich-facts
     owner: andrew
 spec:
-  replicas: 5
+  replicas: 6
   selector:
     matchLabels:
       app: sandwich-facts
