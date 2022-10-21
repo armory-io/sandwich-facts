@@ -1,2 +1,4 @@
 setup/terraform.tfstate.backup
 setup/.terraform
+testing/.terraform.lock.hcl
+testing/.terraform
