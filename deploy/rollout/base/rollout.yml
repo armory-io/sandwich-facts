@@ -20,6 +20,7 @@ spec:
         image: "armory-docker-all.jfrog.io/armory-io/sandwich-facts:${trigger['tag']}"
         ports:
         - containerPort: 8080
+          protocol: TCP
   minReadySeconds: 30
   revisionHistoryLimit: 3
   strategy:
