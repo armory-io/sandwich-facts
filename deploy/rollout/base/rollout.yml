@@ -5,7 +5,6 @@ metadata:
   name: sandwich-facts-rollout
   labels:
     app: sandwich-facts
-    owner: andrew
 spec:
   replicas: 1
   selector:
@@ -18,7 +17,7 @@ spec:
     spec:
       containers:
       - name: sandwich-facts
-        image: armory-docker-all.jfrog.io/armory-io/sandwich-facts
+        image: "armory-docker-all.jfrog.io/armory-io/sandwich-facts:${triggers['tag']}"
         ports:
         - containerPort: 8080
   minReadySeconds: 30
@@ -26,5 +25,4 @@ spec:
   strategy:
 # --- Everything above this comment are the same as a deployment ---
     blueGreen: # A new field for the Blue Green strategy options
-      previewService: sandwich-facts-service # Reference to a service
       activeService: sandwich-facts-service # Reference to a service
