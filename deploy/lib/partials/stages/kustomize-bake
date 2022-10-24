@@ -1,0 +1,41 @@
+{{/* Stage partial for rendering Kustomize manifests.
+
+      name       :: The nane to give this stage.
+      refId      :: the order in the pipeline this stage should live.
+      artifactId :: the artifactId used by other stages to consume rendered
+                    kustomize output. Must be a unique artifact string in the
+                    context of this pipeline.
+      path       :: the path to the desired kustomization.yml file.
+*/}}
+
+{
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "customKind": true,
+        "id": "{{ uuidv4 }}"
+      },
+      "displayName": "{{ var "artifactId" }}",
+      "id": "{{ var "artifactId" }}",
+      "matchArtifact": {
+        "artifactAccount": "embedded-artifact",
+        "customKind": false,
+        "id": "{{ uuidv4 }}",
+        "type": "embedded/base64"
+      },
+      "useDefaultArtifact": false,
+      "usePriorArtifact": false
+    }
+  ],
+  "inputArtifact": {
+    "account": "gitrepo",
+    "artifact": {{ local_module "lib/partials/artifacts/sandwich-facts-repo" }}
+  },
+  "kustomizeFilePath": "{{ var "path" }}",
+  "name": "{{ var "name" }}",
+  "overrides": {},
+  "refId": "{{ var "refId" }}",
+  "requisiteStageRefIds": [],
+  "templateRenderer": "KUSTOMIZE",
+  "type": "bakeManifest"
+}

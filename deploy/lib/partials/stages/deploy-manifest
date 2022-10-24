@@ -1,0 +1,33 @@
+{{/* Stage partial for Deploying Kubernetes manifests to an account.
+
+      name       :: The nane to give this stage.
+      account    :: The account to deploy to.
+      refId      :: the order in the pipeline this stage should live.
+      refIdDeps  :: the stage ids that this stage depends on.
+      artifactId :: the upstream artifactId where k8s manifests are located.
+*/}}
+
+{
+  {{/* NOTE: we prefix 'k8s-' on the account name per the convention in our
+     *       Armory internal CDSH environment.
+     */}}
+  "account": "k8s-{{ var "account" }}",
+  "cloudProvider": "kubernetes",
+  "manifestArtifactId": "{{ var "artifactId" }}",
+  "moniker": {
+    "app": "{{ var "account" }}"
+  },
+  "name": "{{ var "name" }}",
+  "namespaceOverride": "",
+  "refId": "{{ var "refId" }}",
+  "requisiteStageRefIds": {{ var "refIdDeps" }},
+  "skipExpressionEvaluation": false,
+  "source": "artifact",
+  "trafficManagement": {
+    "enabled": false,
+    "options": {
+      "enableTraffic": false
+    }
+  },
+  "type": "deployManifest"
+}

@@ -1,0 +1,9 @@
+{
+  "artifactAccount": "gitrepo",
+  "customKind": true,
+  "id": "ca01d25b-b147-4b59-9b23-6e503b289a0c",
+  "reference": "https://github.com/armory-io/sandwich-facts.git",
+  "type": "git/repo",
+  {{/* NOTE: this is hardcoded right now because the demo doesn't live in master. */}}
+  "version": "feat/ephemeral-infra"
+}

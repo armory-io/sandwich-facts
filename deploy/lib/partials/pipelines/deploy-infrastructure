@@ -1,0 +1,44 @@
+{{/* Pipeline partial for deploying Argo resources.
+
+      name       :: the name to give this pipeline.
+      app_name   :: the application to bind this pipeline to.
+      artifactId :: id that will be used to reference rendered kustomize
+                    manifests.
+      path       :: kustomize path in the sandwich-facts repo to render.
+*/}}
+
+{
+      "application": "{{ var "app_name" }}",
+      "name": "{{ var "name" }}",
+      "limitConcurrent": true,
+      "spelEvaluator": "v4",
+      "stages": [
+        {{- local_module "lib/partials/stages/kustomize-bake"
+              "name"       "Render Manifests"
+              "refId"      "1"
+              "artifactId" (var "artifactId")
+              "path"       (var "path")
+        -}},
+        {{- local_module "lib/partials/stages/deploy-manifest"
+              "name"       "Deploy to Test Env"
+              "refId"      "2"
+              "refIdDeps"  [ "1" ]
+              "account"    "spinnaker-summit-22"
+              "artifactId" (var "artifactId")
+        -}},
+        {{- local_module "lib/partials/stages/deploy-manifest"
+              "name"       "Deploy to Prod-east Env"
+              "refId"      "3"
+              "refIdDeps"  [ "1" ]
+              "account"    "dynamo-staging"
+              "artifactId" (var "artifactId")
+        -}},
+        {{- local_module "lib/partials/stages/deploy-manifest"
+              "name"       "Deploy to Prod-west Env"
+              "refId"      "4"
+              "refIdDeps"  [ "1" ]
+              "account"    "splat-dev"
+              "artifactId" (var "artifactId")
+        -}}
+      ]
+    }

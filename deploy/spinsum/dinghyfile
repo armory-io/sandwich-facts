@@ -1,0 +1,21 @@
+{
+  "application": "{{ var "app_name" }}",
+  "globals": {
+    "app_name": "spinnaker-summit-22",
+    "argoManifestId": "argo-rendered-manifests"
+  },
+  "pipelines": [
+    {{- local_module "lib/partials/pipelines/deploy-infrastructure"
+          "name"       "02 Deploy ArgoCD"
+          "app_name"   (var "app_name")
+          "artifactId" (var "argoManifestId")
+          "path"       "infrastructure/argo/kustomization.yml"
+    -}},
+    {{- local_module "lib/partials/pipelines/deploy-infrastructure"
+          "name"       "03 Deploy Argo Rollouts"
+          "app_name"   (var "app_name")
+          "artifactId" (var "argoManifestId")
+          "path"       "infrastructure/argo-rollouts/kustomization.yml"
+    -}}
+  ]
+}
