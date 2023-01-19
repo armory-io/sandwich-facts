@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: sandwich-facts
-        image: "armory-docker-all.jfrog.io/armory-io/sandwich-facts:${trigger['tag']}"
+        image: "armory/sandwich-facts:latest"
         ports:
         - containerPort: 8080
           protocol: TCP
