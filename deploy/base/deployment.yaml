@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: sandwich-facts
-        image: armory/sandwich-facts
+        image: armory/sandwich-facts:latest
         ports:
         - containerPort: 8080
