@@ -3,7 +3,8 @@
   "globals": {
     "app": "sandwich-facts",
     "east": "k8s-us-east-demo-cluster",
-    "west": "k8s-us-west-demo-cluster"
+    "west": "k8s-us-west-demo-cluster",
+    "nowvar": "test var"
   },
   "pipelines": [
     {
